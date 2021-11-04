@@ -8,7 +8,7 @@ import (
 )
 
 func printXMLTree(tree xmltree.Element) {
-	fmt.Println("draft")
+	fmt.Println(tree)
 }
 
 
