@@ -7,8 +7,25 @@ import (
 	"os"
 )
 
+func getXmlString(tree xmltree.Node, tabNumber int) string {
+	var tabs string
+	for i := 0; i < tabNumber; i++ {
+		tabs += "\t"
+	}
+	node, ok := tree.(xmltree.Element)
+	if !ok {
+		return fmt.Sprintf("%s%s\n", tabs, node)
+	}
+	result := fmt.Sprintf("%s<%s>\n", tabs, node.Type.Local)
+	for _, child := range node.Children {
+		result += getXmlString(child, tabNumber + 1)
+	}
+	result += fmt.Sprintf("%s<%s>\n", tabs, node.Type.Local)
+	return result
+}
+
 func printXMLTree(tree xmltree.Element) {
-	fmt.Println(tree)
+	fmt.Print(getXmlString(tree, 0))
 }
 
 func main() {
