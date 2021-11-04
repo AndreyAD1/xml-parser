@@ -20,6 +20,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	xmlTree := xmltree.GetXMLTree(inputFile)
+	xmlTree, err := xmltree.GetXMLTree(inputFile)
+	if err != nil {
+		log.Fatal(err)
+	}
 	printXMLTree(xmlTree)
 }
