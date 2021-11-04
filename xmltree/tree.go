@@ -16,6 +16,6 @@ type Element struct {
 }
 
 func (e Element) String() string {
-	output := fmt.Sprintf("<%s %s>", e.Type.Local, e.Attr)
+	output := fmt.Sprintf("<%s> %s", e.Type.Local, e.Children)
 	return output
 }

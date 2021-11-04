@@ -12,15 +12,15 @@ func getXmlString(tree xmltree.Node, tabNumber int) string {
 	for i := 0; i < tabNumber; i++ {
 		tabs += "\t"
 	}
-	node, ok := tree.(xmltree.Element)
-	if !ok {
-		return fmt.Sprintf("%s%s\n", tabs, node)
+	if node, ok := tree.(xmltree.CharData); ok {
+		return fmt.Sprintf("%s %s\n", tabs, node)
 	}
-	result := fmt.Sprintf("%s<%s>\n", tabs, node.Type)
+	node := tree.(xmltree.Element)
+	result := fmt.Sprintf("%s<%s %s>\n", tabs, node.Type.Space, node.Type.Local)
 	for _, child := range node.Children {
 		result += getXmlString(child, tabNumber + 1)
 	}
-	result += fmt.Sprintf("%s<%s>\n", tabs, node.Type)
+	result += fmt.Sprintf("%s<%s %s>\n", tabs, node.Type.Space, node.Type.Local)
 	return result
 }
 
