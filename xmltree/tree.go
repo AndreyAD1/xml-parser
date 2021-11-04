@@ -10,15 +10,15 @@ type Node interface{} // Chardata or *Element
 type CharData string
 
 type Element struct {
-	Type xml.Name
-	Attr []xml.Attr
+	Type     xml.Name
+	Attr     []xml.Attr
 	Children []Node
 }
 
 func (e Element) String() string {
 	output := fmt.Sprintf(
-		"Type: %s, Attrs: %s, Children: \n\t%s", 
-		e.Type, 
+		"Type: %s, Attrs: %s, Children: \n%s",
+		e.Type,
 		e.Attr,
 		e.Children,
 	)
